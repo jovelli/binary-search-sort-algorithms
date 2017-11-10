@@ -1,9 +1,5 @@
 package com.springboot.binarysearch;
 
-import java.util.Arrays;
-import java.util.function.IntPredicate;
-import java.util.stream.IntStream;
-
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,21 +9,35 @@ public class BinarySearch {
     @Autowired
     private SortMethod sortMethod;
 
+    private int[] numbers;
+
     public BinarySearch(SortMethod sortMethod) {
         this.sortMethod = sortMethod;
     }
 
     public boolean apply(int[] numbers, int n ) {
         boolean result;
-        IntPredicate p = (int x) -> x == n;
 
-        int[] numbersSorted = sortMethod.sort(numbers);
+        this.numbers = sortMethod.sort(numbers);
+        result = search(0, this.numbers.length - 1, n);
 
-        System.out.println("numbersSorted " + Arrays.toString(numbersSorted));
+        return result;
+    }
 
-        System.out.printf("\nSort Method Used: %s", sortMethod.toString());
+    //Complexity log(numbers.length)
+    private boolean search(int begin, int end, int n) {
+        boolean result;
 
-        result = IntStream.of(numbersSorted).anyMatch(p);
+        int pivot = (begin + end) / 2;
+
+        if ( n == numbers[pivot] ) return true;
+        if ( begin >= end ) return false;
+
+        if  ( n > numbers[pivot] ) {
+            result = search(pivot + 1, end, n);
+        } else {
+            result = search(begin, pivot - 1, n);
+        }
 
         return result;
     }
