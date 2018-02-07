@@ -1,7 +1,10 @@
 package com.springboot.binarysearch;
 
+import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Arrays;
 
 @Component
 public class BinarySearch {
@@ -20,6 +23,8 @@ public class BinarySearch {
 
         this.numbers = sortMethod.sort(numbers);
         result = search(0, this.numbers.length - 1, n);
+
+        System.out.println(Arrays.toString(this.numbers));
 
         return result;
     }

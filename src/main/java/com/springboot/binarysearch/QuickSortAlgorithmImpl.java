@@ -3,6 +3,8 @@ package com.springboot.binarysearch;
 import org.springframework.stereotype.Component;
 import org.springframework.context.annotation.Primary;
 
+import java.util.Arrays;
+
 @Component
 @Primary
 public class QuickSortAlgorithmImpl implements SortMethod {
